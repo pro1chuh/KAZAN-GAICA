@@ -1,8 +1,8 @@
 import argparse
 import sys
 
-from gaica_bot.client import BotClient
-from gaica_bot.controller import BotController
+from smurf_bot.client import BotClient
+from smurf_bot.controller import BotController
 
 
 def parse_args() -> argparse.Namespace:
