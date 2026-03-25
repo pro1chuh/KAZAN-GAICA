@@ -1,0 +1,72 @@
+console.log("Simple client started");
+
+const canvas = document.getElementById("game-canvas");
+const ctx = canvas.getContext("2d");
+
+function draw(state) {
+    if (!ctx || !canvas) return;
+    
+    ctx.fillStyle = "#1a1a2e";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    
+    if (!state || !state.players) return;
+    
+    // Draw pickups
+    if (state.pickups) {
+        for (const p of state.pickups) {
+            ctx.fillStyle = "#ffaa44";
+            ctx.fillRect(p.position[0] - 10, p.position[1] - 10, 20, 20);
+            ctx.fillStyle = "white";
+            ctx.font = "10px monospace";
+            ctx.fillText(p.type === "uzi" ? "U" : "R", p.position[0] - 3, p.position[1] + 4);
+        }
+    }
+    
+    // Draw players
+    for (const player of state.players) {
+        ctx.fillStyle = player.color;
+        ctx.beginPath();
+        ctx.arc(player.position[0], player.position[1], 12, 0, Math.PI * 2);
+        ctx.fill();
+        
+        ctx.fillStyle = "white";
+        ctx.font = "bold 14px monospace";
+        ctx.fillText(player.id, player.position[0] - 5, player.position[1] - 10);
+        
+        // Weapon indicator
+        if (player.weapon && player.weapon.type !== "none") {
+            ctx.fillStyle = "#ffaa44";
+            ctx.font = "12px monospace";
+            ctx.fillText(player.weapon.type === "revolver" ? "R" : "U", 
+                        player.position[0] - 5, player.position[1] + 15);
+        }
+        
+        // Facing direction
+        if (player.facing) {
+            ctx.beginPath();
+            ctx.moveTo(player.position[0], player.position[1]);
+            ctx.lineTo(player.position[0] + player.facing[0] * 25, 
+                       player.position[1] + player.facing[1] * 25);
+            ctx.strokeStyle = "white";
+            ctx.lineWidth = 2;
+            ctx.stroke();
+        }
+    }
+    
+    // Info panel
+    document.getElementById("status").innerHTML = 
+        `Status: ${state.status || "running"} | Tick: ${state.tick || 0} | Time: ${(state.time_seconds || 0).toFixed(1)}s`;
+    document.getElementById("round").innerHTML = 
+        `Player 1: ${state.players[0]?.alive ? "alive" : "dead"} | Player 2: ${state.players[1]?.alive ? "alive" : "dead"}`;
+    
+    const connected = (state.bots_connected || []).join(", ");
+    document.getElementById("bots").innerHTML = `Bots: ${connected || "none"}`;
+}
+
+async function update() {
+    try {
+        const response = await fetch("/api/state");
+        const state = await response.json();
+        draw(state);
+    } catch (e) {
+        console.error("Error:",

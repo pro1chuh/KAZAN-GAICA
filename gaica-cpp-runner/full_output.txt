@@ -1,0 +1,74 @@
+======================================
+GAICA C++ Game Runner
+======================================
+Bot A: C:\VSCodeProj\KAZAN\bot\Osnova
+Bot B: C:\VSCodeProj\KAZAN\bot\TestsBots\my_smurf_bot_v10
+Series Rounds: 1
+Seed: 42
+Output: ./results
+======================================
+
+
+=== Starting Series: 1 rounds ===
+
+Round 1 (seed 43):
+  Port A: 9999, Port B: 10000
+  Socket servers started
+  Bot A script: C:\VSCodeProj\KAZAN\bot\Osnova\main.py
+  Bot B script: C:\VSCodeProj\KAZAN\bot\TestsBots\my_smurf_bot_v10\main.py
+  Starting Bot A...
+    [DEBUG] Checking script: C:\VSCodeProj\KAZAN\bot\Osnova\main.py
+    [DEBUG] Script exists
+    [DEBUG] Using: py
+    [DEBUG] Command: py "C:\VSCodeProj\KAZAN\bot\Osnova\main.py" 127.0.0.1 9999
+    [DEBUG] Process started, PID: 19960
+  Starting Bot B...
+    [DEBUG] Checking script: C:\VSCodeProj\KAZAN\bot\TestsBots\my_smurf_bot_v10\main.py
+    [DEBUG] Script exists
+    [DEBUG] Using: py
+    [DEBUG] Command: py "C:\VSCodeProj\KAZAN\bot\TestsBots\my_smurf_bot_v10\main.py" 127.0.0.1 10000
+    [DEBUG] Process started, PID: 2120
+  Waiting 3 seconds for bots to initialize...
+  Waiting for Bot A connection on port 9999...
+  Bot A connected!
+  Waiting for Bot B connection on port 10000...
+  Bot B connected!
+  Sending hello messages...
+  Sending round start messages...
+  Starting game simulation...
+  Tick 100
+  Tick 200
+  Tick 300
+  Tick 400
+  Tick 500
+  Tick 600
+  Tick 700
+  Tick 800
+  Tick 900
+  Tick 1000
+  Tick 1100
+  Tick 1200
+  Tick 1300
+  Tick 1400
+  Tick 1500
+  Tick 1600
+  Tick 1700
+  Tick 1800
+  Round finished after 1801 ticks
+  Winner: Draw
+
+Results saved to: ./results/outcome.json
+
+======================================
+Series Results
+======================================
+Bot A Wins: 0
+Bot B Wins: 0
+Result: DRAW
+Total Ticks: 1801
+Wall Time: 3.364s
+Average per Round: 3.364s
+Simulated Time: 0s
+======================================
+
+Results saved to: ./results/outcome.json
